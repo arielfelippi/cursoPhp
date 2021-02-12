@@ -4,5 +4,7 @@ echo "olá mundo!";
 echo "<br>";
 
 phpinfo();
-echo "estamos no dev"
+
+echo "simulando um conflito";
+
 echo " criamos o branch DEV";
