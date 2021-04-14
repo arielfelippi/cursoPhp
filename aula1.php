@@ -5,6 +5,11 @@ echo "<br>";
 
 phpinfo();
 // exibirDataAtual();
+echo "nosso teste de conflito!";
+echo "nosso teste de conflito!";
+echo "nosso teste de conflito!";
+echo "nosso teste de conflito!";
+echo "nosso teste de conflito!";
 
 echo "simulando um conflito";
 
