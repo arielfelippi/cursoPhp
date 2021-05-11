@@ -1,6 +1,6 @@
 <?php
 
-require_once "../models/PessoaModel.class.php";
+include __DIR__ . "../../models/PessoaModel.php";
 
 class PessoaController {
 
@@ -12,13 +12,7 @@ class PessoaController {
 
     public function obterDadosPessoa() {
         $arrayDados = $this->variavelPessoaModel->retornarDados();
-        echo json_encode($arrayDados);
+        return $arrayDados;
     }
 }
 
-
-$pessoaController = new PessoaController();
-
-echo $pessoaController->obterDadosPessoa();
-
-exit();
