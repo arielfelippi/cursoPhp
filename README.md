@@ -10,6 +10,48 @@ Instalar PHP7.4
 ```
 
 
+Hosts (C:\Windows\System32\drivers\etc\hosts)
+
+```TEXT
+#
+#127.0.0.1 localhost
+#::1 localhost
+
+127.0.0.1 localhost
+127.0.0.1 laravel.investment
+
+::1 localhost
+::1 laravel.investment
+```
+
+
+Virtual Hosts (Apache)
+
+```XML
+<VirtualHost *:80>
+  ServerName localhost
+  ServerAlias localhost
+  DocumentRoot "${INSTALL_DIR}/www"
+  <Directory "${INSTALL_DIR}/www/">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName laravel.investment
+  ServerAlias laravel.investment
+  DocumentRoot "${INSTALL_DIR}/www/laravel/investment/public"
+  <Directory "${INSTALL_DIR}/www/laravel/investment/public/">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>
+```
+
+
 XDebug
 
 ```JAVASCRIPT
