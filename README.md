@@ -42,7 +42,7 @@ XDebug
 
 HotKeys VsCode (atalhos)
 
-``JAVASCRIPT
+```JAVASCRIPT
 // Place your key bindings in this file to override the defaultsauto[]
 [
 	{
@@ -134,7 +134,7 @@ HotKeys VsCode (atalhos)
 
 Config VsCode (JSON_Settings)
 
-``JAVASCRIPT
+```JAVASCRIPT
 {
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.renderWhitespace": "none",
