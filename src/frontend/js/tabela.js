@@ -52,6 +52,35 @@ $(document).ready(function () {
 	var tabelaTarefas = $("#idTabelaTarefas");
 	montarTabela();
 
+
+	$(".btnEditar").on("click", function () {
+		var $botaoEditar = $(this);
+
+		console.log("O botão clicado foi: ", $botaoEditar.text(), " valor: ", $botaoEditar.val());
+	});
+
+	$('#idTabelaTarefas').on('click', '.btnExcluir', function (e) {
+		e.preventDefault();
+		var $botaoExcluir = $(this);
+
+		console.log("O botão clicado foi: ", $botaoExcluir.text(), " valor: ", $botaoExcluir.val());
+
+		$botaoExcluir.closest('tr').remove();
+	});
+
+
+	function dadosTabela() {
+		var dadosTarefa = [];
+
+		dadosTarefa = [ 
+			{ id: 3, nome: "tarefa1", usuario: "ariel", data: "18/05/2021" },
+			{ id: 4, nome: "tarefa2", usuario: "tiago", data: "18/05/2021" },
+			{ id: 5, nome: "tarefa3", usuario: "sadi", data: "18/05/2021" },
+		];
+
+		return dadosTarefa;
+	}
+
 	function montarTabela() {
 		var cabecalho = montarCabecalhoTabela();
 		var corpo = montarCorpoTabela();
@@ -78,22 +107,27 @@ $(document).ready(function () {
 	}
 
 	function montarCorpoTabela() {
-		var corpo = (
-			'<tbody>' +
-				'<tr>'+
-					'<td>1</td>' +
-					'<td>Mark</td>' +
-					'<td>Otto</td>' +
-					'<td>@mdo</td>' +
-					'<td>' +
-						'<button type="button" class="btn btn-warning btnEditar" value=1>Editar</button>' +
-						'&nbsp;' +
-						'<button type="button" class="btn btn-danger btnExcluir" value=1>Excluir</button>' +
-					'</td>' +
-				'</tr>' +
-			'</tbody>'
-		);
+		var corpo = '<tbody>';
+		var tarefas = dadosTabela();
 
+		$.each(tarefas,  function(idx, tarefa) {
+			corpo += (
+			'<tr>'+
+				'<td>' + tarefa.id+ '</td>' +
+				'<td>' + tarefa.nome+ '</td>' +
+				'<td>' + tarefa.usuario+ '</td>' +
+				'<td>' + tarefa.data+ '</td>' +
+				'<td>' +
+					'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id+ '>Editar</button>' +
+					'&nbsp;' +
+					'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id+ '>Excluir</button>' +
+				'</td>' +
+			'</tr>'
+			);
+		});
+
+		corpo += '</tbody>';
+		
 		return corpo;
 	}
 
