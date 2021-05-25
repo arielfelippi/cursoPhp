@@ -49,6 +49,7 @@
 
 $(document).ready(function () {
 
+	var dadosTarefasAtual = dadosTabela(); // Inicializando com todos os dados
 	var tabelaTarefas = $("#idTabelaTarefas");
 	montarTabela();
 
@@ -65,7 +66,19 @@ $(document).ready(function () {
 
 		console.log("O botão clicado foi: ", $botaoExcluir.text(), " valor: ", $botaoExcluir.val());
 
-		$botaoExcluir.closest('tr').remove();
+		var novosDados = [];
+
+		$.each(dadosTarefasAtual, function(idx, tarefa) {
+			if (tarefa.id != $botaoExcluir.val()) {
+				novosDados.push(tarefa);
+				// tarefa = { id: 3, nome: "tarefa1", usuario: "ariel", data: "18/05/2021" }
+			}
+		});
+
+		dadosTarefasAtual = novosDados;
+		montarTabela();
+
+		// $botaoExcluir.closest('tr').remove();
 	});
 
 
@@ -76,6 +89,8 @@ $(document).ready(function () {
 			{ id: 3, nome: "tarefa1", usuario: "ariel", data: "18/05/2021" },
 			{ id: 4, nome: "tarefa2", usuario: "tiago", data: "18/05/2021" },
 			{ id: 5, nome: "tarefa3", usuario: "sadi", data: "18/05/2021" },
+			{ id: 6, nome: "tarefa4", usuario: "michel", data: "25/05/2021" },
+			{ id: 7, nome: "tarefa5", usuario: "gabriel", data: "25/05/2021" },
 		];
 
 		return dadosTarefa;
@@ -108,7 +123,7 @@ $(document).ready(function () {
 
 	function montarCorpoTabela() {
 		var corpo = '<tbody>';
-		var tarefas = dadosTabela();
+		var tarefas = dadosTarefasAtual;
 
 		$.each(tarefas,  function(idx, tarefa) {
 			corpo += (
