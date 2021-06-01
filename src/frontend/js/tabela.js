@@ -6,10 +6,24 @@ $(document).ready(function () {
 
 
 	$(".btnInserir").on("click", function () {
-		var $botaoInserir = $(this);
+		
+		var formEstaOk = validarForm();
 
-		console.log("O botão clicado foi: ", $botaoInserir.text(), " valor: ", $botaoInserir.val());
-		validarForm();
+		if (formEstaOk) {
+			$("#formTarefas").submit(function( event ) {
+				alert( "funcionou o submit do form" );
+				event.preventDefault();
+
+				// { idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" }
+				var dadosTarefaSubmit = {
+					idDaTarefa: $("#idDaTarefa").val(),
+					nomeDaTarefa: $("#nomeDaTarefa").val(),
+					usuarioDaTarefa: $("#usuarioDaTarefa").val(),
+					dataDaTarefa: $("#dataDaTarefa").val(),
+				}
+
+			});
+		}		
 	});
 
 
@@ -45,11 +59,11 @@ $(document).ready(function () {
 		var dadosTarefa = [];
 
 		dadosTarefa = [ 
-			{ id: 3, nome: "tarefa1", usuario: "ariel", data: "18/05/2021" },
-			{ id: 4, nome: "tarefa2", usuario: "tiago", data: "18/05/2021" },
-			{ id: 5, nome: "tarefa3", usuario: "sadi", data: "18/05/2021" },
-			{ id: 6, nome: "tarefa4", usuario: "michel", data: "25/05/2021" },
-			{ id: 7, nome: "tarefa5", usuario: "gabriel", data: "25/05/2021" },
+			{ idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" },
+			{ idDaTarefa: 4, nomeDaTarefa: "tarefa2", usuarioDaTarefa: "tiago", dataDaTarefa: "18/05/2021" },
+			{ idDaTarefa: 5, nomeDaTarefa: "tarefa3", usuarioDaTarefa: "sadi", dataDaTarefa: "18/05/2021" },
+			{ idDaTarefa: 6, nomeDaTarefa: "tarefa4", usuarioDaTarefa: "michel", dataDaTarefa: "25/05/2021" },
+			{ idDaTarefa: 7, nomeDaTarefa: "tarefa5", usuarioDaTarefa: "gabriel", dataDaTarefa: "25/05/2021" },
 		];
 
 		return dadosTarefa;

@@ -40,20 +40,20 @@
 				<div class="modal-body">
 
 					<!-- FORM DA TAREFA -->
-					<form class="row g-3 needs-validation" novalidate>
+					<form id="formTarefas" class="row g-3 needs-validation" novalidate>
 
 						<div class="col-md-3">
-							<label for="idTarefa" class="form-label">Id da Tarefa</label>
-							<input type="text" class="form-control" id="idTarefa" value="" required>
-							<div class="valid-feedback">
+							<label for="idDaTarefa" class="form-label">Id da Tarefa</label>
+							<input type="number" min="1" class="form-control" id="idDaTarefa" required>
+							<div class="invalid-feedback">
 								Informe um id para a tarefa
 							</div>
 						</div>
 
-						<div class="col-md-8">
-							<label for="nomeTarefa" class="form-label">Nome da tarefa</label>
-							<input type="text" class="form-control" id="nomeTarefa" value="" required>
-							<div class="valid-feedback">
+						<div class="col-md-9">
+							<label for="nomeDaTarefa" class="form-label">Nome da tarefa</label>
+							<input type="text" class="form-control" id="nomeDaTarefa" required>
+							<div class="invalid-feedback">
 								Informe um nome para a tarefa
 							</div>
 						</div>
