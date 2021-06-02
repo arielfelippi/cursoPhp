@@ -7,23 +7,44 @@ $(document).ready(function () {
 
 	$(".btnInserir").on("click", function () {
 		
-		var formEstaOk = validarForm();
+		validarForm();
+		
+		
+		$("#formTarefas").submit(function( event ) {
+			event.preventDefault();
 
-		if (formEstaOk) {
-			$("#formTarefas").submit(function( event ) {
-				alert( "funcionou o submit do form" );
-				event.preventDefault();
+			// { idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" }
+			var dadosTarefaSubmit = {
+				idDaTarefa: $("#idDaTarefa").val(),
+				nomeDaTarefa: $("#nomeDaTarefa").val(),
+				usuarioDaTarefa: $("#usuarioDaTarefa").val(),
+				dataDaTarefa: $("#dataDaTarefa").val(),
+			};
 
-				// { idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" }
-				var dadosTarefaSubmit = {
-					idDaTarefa: $("#idDaTarefa").val(),
-					nomeDaTarefa: $("#nomeDaTarefa").val(),
-					usuarioDaTarefa: $("#usuarioDaTarefa").val(),
-					dataDaTarefa: $("#dataDaTarefa").val(),
-				}
+			$.post( "test.php", dadosTarefaSubmit)
+				.done(function( response ) {
+					
+					alert( "CallBack do DONE vinda do PHP (response): " + response );
+				})
+				.fail(function( response ) {
+					alert( "FALHOU o POST para o PHP: " + response );
+				});
 
-			});
-		}		
+
+			// $.ajax({
+			// 	url: "test.php",
+			// 	type: "post",
+			// 	data: dadosTarefaSubmit
+			// })			
+			// .fail(function( response ) {
+			// 	alert( "FALHOU o POST para o PHP: " + response );
+			// })
+			// .done(function( response ) {
+			// 	alert( "CallBack do DONE vinda do PHP (response): " + response );
+			// });
+
+		});
+				
 	});
 
 
@@ -101,10 +122,10 @@ $(document).ready(function () {
 		$.each(tarefas,  function(idx, tarefa) {
 			corpo += (
 			'<tr>'+
-				'<td>' + tarefa.id+ '</td>' +
-				'<td>' + tarefa.nome+ '</td>' +
-				'<td>' + tarefa.usuario+ '</td>' +
-				'<td>' + tarefa.data+ '</td>' +
+				'<td>' + tarefa.idDaTarefa + '</td>' +
+				'<td>' + tarefa.nomeDaTarefa + '</td>' +
+				'<td>' + tarefa.usuarioDaTarefa + '</td>' +
+				'<td>' + tarefa.dataDaTarefa + '</td>' +
 				'<td>' +
 					'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id+ '>Editar</button>' +
 					'&nbsp;' +
