@@ -21,9 +21,10 @@ $(document).ready(function () {
 				dataDaTarefa: $("#dataDaTarefa").val(),
 			};
 
-			$.post( "test.php", dadosTarefaSubmit)
+			var url = "../../backend/controllers/tarefasController.php";
+
+			$.post(url, dadosTarefaSubmit)
 				.done(function( response ) {
-					
 					alert( "CallBack do DONE vinda do PHP (response): " + response );
 				})
 				.fail(function( response ) {
@@ -90,7 +91,7 @@ $(document).ready(function () {
 		return dadosTarefa;
 	}
 
-	function montarTabela() {
+	function montarTabela(cxdfdssdf) {
 		var cabecalho = montarCabecalhoTabela();
 		var corpo = montarCorpoTabela();
 		var htmlDaTabela = (cabecalho + corpo);
