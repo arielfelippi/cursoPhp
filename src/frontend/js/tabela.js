@@ -21,14 +21,16 @@ $(document).ready(function () {
 				dataDaTarefa: $("#dataDaTarefa").val(),
 			};
 
-			var url = "../../backend/controllers/tarefasController.php";
+			var url = "../../backend/controllers/TarefasController.php";
 
 			$.post(url, dadosTarefaSubmit)
 				.done(function( response ) {
 					alert( "CallBack do DONE vinda do PHP (response): " + response );
 				})
 				.fail(function( response ) {
-					alert( "FALHOU o POST para o PHP: " + response );
+					console.log(response);
+					console.log( Promise.reject(response.json()));
+					alert( "FALHOU o POST para o PHP: " + response.message );
 				});
 
 
