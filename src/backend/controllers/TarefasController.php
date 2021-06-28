@@ -1,34 +1,34 @@
 <?php
 
-require_once "../models/TarefasModel.php"; // importar o arquivo
+require_once "../../frontend/view/index.php";
 
 class TarefasController {
 
-    public function obterTarefas() {
-        // return { idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" };
-    }
+	protected $tarefasModel;
 
-    public function cadastrarTarefas() {
+	public function __construct() {
+		$this->tarefasModel = new TarefasModel();
+	}
 
-        $dadosTarefa = $_POST; // ' '
+	public function obterTarefas() {
+	}
 
-        $this->validarTarefa($dadosTarefa);
+	public function cadastrarTarefasController() {
+		$dadosTarefa = $_POST; // Obtém os dados enviados pelo front para o back.
 
-        $dadosTarefa = [];
+		$this->validarTarefa($dadosTarefa);
 
-        $tarefasModel = new TarefasModel();
-        $tarefasModel->cadastrarTarefasModel($dadosTarefa);
-        // mais logicas de codigo
+		return $this->tarefasModel->cadastrarTarefasModel($dadosTarefa);
+	}
 
-    }
+	private function validarTarefa($dadosTarefa = []) {
+		if (empty($dadosTarefa["nomeDaTarefa"])) {
+			throw new Exception("Controller: O nome da tarefa está em branco");
+		}
+	}
 
-    private function validarTarefa($dadosTarefa = []) {
-        if (empty($dadosTarefa["nomeDaTarefa"])) {
-            throw new Exception("O nome da tarefa está em branco");
-        }
-    }
 }
 
 $tarefa = new TarefasController();
 
-$tarefa->cadastrarTarefas();
+$tarefa->cadastrarTarefasController();

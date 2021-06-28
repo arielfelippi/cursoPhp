@@ -1,16 +1,18 @@
 <?php
 
-// require_once "../database/ConexaoBanco.php";
-
 class TarefasModel {
 
-    public function cadastrarTarefasModel($dadosTarefa = []) {
+	public function __construct() {
+		$x = 0;
+		$conexaoBanco = new ConexaoBanco();
+	}
 
-        if (empty($dadosTarefa)) { // se ta vazio ou não passou parametro retorno erro.
-            throw new Exception("Model: O array de dados da tarefa está em branco");
-        }
+	public function cadastrarTarefasModel($dadosTarefa = []) {
+		if (empty($dadosTarefa)) { // se ta vazio ou não passou parâmetro retorno erro.
+			throw new Exception("Model: O array de dados da tarefa está em branco");
+		}
 
-        // criar a logica para salvar os dados no banco
+		// criar a logica para salvar os dados no banco
+	}
 
-    }
 }

@@ -6,11 +6,11 @@ $(document).ready(function () {
 
 
 	$(".btnInserir").on("click", function () {
-		
+
 		validarForm();
-		
-		
-		$("#formTarefas").submit(function( event ) {
+
+
+		$("#formTarefas").submit(function (event) {
 			event.preventDefault();
 
 			// { idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" }
@@ -24,13 +24,13 @@ $(document).ready(function () {
 			var url = "../../backend/controllers/TarefasController.php";
 
 			$.post(url, dadosTarefaSubmit)
-				.done(function( response ) {
-					alert( "CallBack do DONE vinda do PHP (response): " + response );
+				.done(function (response) {
+					alert("CallBack do DONE vinda do PHP (response): " + response);
 				})
-				.fail(function( response ) {
+				.fail(function (response) {
 					console.log(response);
-					console.log( Promise.reject(response.json()));
-					alert( "FALHOU o POST para o PHP: " + response.message );
+					// console.log(Promise.reject(response.json()));
+					alert("FALHOU o POST para o PHP: " + response.data);
 				});
 
 
@@ -38,7 +38,7 @@ $(document).ready(function () {
 			// 	url: "test.php",
 			// 	type: "post",
 			// 	data: dadosTarefaSubmit
-			// })			
+			// })
 			// .fail(function( response ) {
 			// 	alert( "FALHOU o POST para o PHP: " + response );
 			// })
@@ -47,7 +47,7 @@ $(document).ready(function () {
 			// });
 
 		});
-				
+
 	});
 
 
@@ -65,7 +65,7 @@ $(document).ready(function () {
 
 		var novosDados = [];
 
-		$.each(dadosTarefasAtual, function(idx, tarefa) {
+		$.each(dadosTarefasAtual, function (idx, tarefa) {
 			if (tarefa.id != $botaoExcluir.val()) {
 				novosDados.push(tarefa);
 				// tarefa = { id: 3, nome: "tarefa1", usuario: "ariel", data: "18/05/2021" }
@@ -82,7 +82,7 @@ $(document).ready(function () {
 	function dadosTabela() {
 		var dadosTarefa = [];
 
-		dadosTarefa = [ 
+		dadosTarefa = [
 			{ idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" },
 			{ idDaTarefa: 4, nomeDaTarefa: "tarefa2", usuarioDaTarefa: "tiago", dataDaTarefa: "18/05/2021" },
 			{ idDaTarefa: 5, nomeDaTarefa: "tarefa3", usuarioDaTarefa: "sadi", dataDaTarefa: "18/05/2021" },
@@ -99,19 +99,19 @@ $(document).ready(function () {
 		var htmlDaTabela = (cabecalho + corpo);
 
 		tabelaTarefas.html(htmlDaTabela);
-		
+
 	}
 
 	function montarCabecalhoTabela() {
 		var cabecalho = (
 			'<thead class="table-dark">' +
-				'<tr>' +
-					'<th scope="col">Id</th>' +
-					'<th scope="col">Tarefa</th>' +
-					'<th scope="col">Usuário</th>' +
-					'<th scope="col">Data</th>' +
-					'<th scope="col">Ações</th>' +
-				'</tr>' +
+			'<tr>' +
+			'<th scope="col">Id</th>' +
+			'<th scope="col">Tarefa</th>' +
+			'<th scope="col">Usuário</th>' +
+			'<th scope="col">Data</th>' +
+			'<th scope="col">Ações</th>' +
+			'</tr>' +
 			'</thead>'
 		);
 
@@ -122,24 +122,24 @@ $(document).ready(function () {
 		var corpo = '<tbody>';
 		var tarefas = dadosTarefasAtual;
 
-		$.each(tarefas,  function(idx, tarefa) {
+		$.each(tarefas, function (idx, tarefa) {
 			corpo += (
-			'<tr>'+
+				'<tr>' +
 				'<td>' + tarefa.idDaTarefa + '</td>' +
 				'<td>' + tarefa.nomeDaTarefa + '</td>' +
 				'<td>' + tarefa.usuarioDaTarefa + '</td>' +
 				'<td>' + tarefa.dataDaTarefa + '</td>' +
 				'<td>' +
-					'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id+ '>Editar</button>' +
-					'&nbsp;' +
-					'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id+ '>Excluir</button>' +
+				'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id + '>Editar</button>' +
+				'&nbsp;' +
+				'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id + '>Excluir</button>' +
 				'</td>' +
-			'</tr>'
+				'</tr>'
 			);
 		});
 
 		corpo += '</tbody>';
-		
+
 		return corpo;
 	}
 
