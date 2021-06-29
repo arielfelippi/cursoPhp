@@ -36,11 +36,11 @@ class ConexaoBanco {
 		// Cria banco de dados se não existir
 		$sql = "CREATE DATABASE IF NOT EXISTS {$this->nomeBanco}";
 
-		if (mysqli_query($this->conexao, $sql)) {
-			echo "<br> Banco de dados criado com sucesso.";
-		} else {
+		if (!mysqli_query($this->conexao, $sql)) {
 			echo "Erro ao criar banco de dados: " . mysqli_error($this->conexao);
 		}
+
+		echo "<br> Banco de dados criado com sucesso.";
 	}
 
 }

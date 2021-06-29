@@ -4,11 +4,9 @@ $(document).ready(function () {
 	var tabelaTarefas = $("#idTabelaTarefas");
 	montarTabela();
 
-
 	$(".btnInserir").on("click", function () {
 
 		validarForm();
-
 
 		$("#formTarefas").submit(function (event) {
 			event.preventDefault();
@@ -21,18 +19,23 @@ $(document).ready(function () {
 				dataDaTarefa: $("#dataDaTarefa").val(),
 			};
 
-			var url = "../../backend/controllers/TarefasController.php";
+			var url = "../../backend/controllers/TarefasController.php/";
+			var dados = {
+				funcao: "cadastrarTarefasController",
+				dadosTarefa: dadosTarefaSubmit,
+			}
 
-			$.post(url, dadosTarefaSubmit)
+			$.post(url, dados)
 				.done(function (response) {
-					alert("CallBack do DONE vinda do PHP (response): " + response);
+					console.log("done: " + response);
+					var msg = "CallBack do DONE vinda do PHP (response): " + response;
+					alert(msg);
 				})
 				.fail(function (response) {
-					console.log(response);
-					// console.log(Promise.reject(response.json()));
-					alert("FALHOU o POST para o PHP: " + response.data);
+					console.log("fail: " + response);
+					var msg = "CallBack do FAIL vinda do PHP (response): " + response;
+					alert(msg);
 				});
-
 
 			// $.ajax({
 			// 	url: "test.php",

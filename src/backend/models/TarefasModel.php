@@ -3,8 +3,7 @@
 class TarefasModel {
 
 	public function __construct() {
-		$x = 0;
-		$conexaoBanco = new ConexaoBanco();
+		new ConexaoBanco();
 	}
 
 	public function cadastrarTarefasModel($dadosTarefa = []) {
