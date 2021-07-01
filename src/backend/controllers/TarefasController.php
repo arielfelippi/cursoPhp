@@ -2,7 +2,9 @@
 
 require_once "../../frontend/view/index.php";
 
-class TarefasController {
+use backend\core\controller\IBaseController;
+
+class TarefasController implements IBaseController {
 
 	protected $dadosTarefa;
 	protected $tarefasModel;
@@ -14,25 +16,31 @@ class TarefasController {
 		$this->tarefasModel = new TarefasModel();
 	}
 
-	public function obterTarefasController() {
-		echo json_encode(["mensagem" => "ola mundo"]);
-		exit;
+	public function listar() {
 	}
 
-	public function cadastrarTarefasController() {
+	public function criar() {
 		$this->validarTarefaController();
 
 		return $this->tarefasModel->cadastrarTarefasModel($this->dadosTarefa);
 	}
 
-	public function atualizarTarefasController() {
+	public function atualizar() {
+		echo json_encode(["mensagem" => "ola mundo"]);
+		exit;
+	}
+
+	public function excluir() {
+		echo json_encode(["mensagem" => "ola mundo"]);
+		exit;
+	}
+
+	public function listarTodos() {
 		echo json_encode(["mensagem" => "ola mundo"]);
 		exit;
 	}
 
 	public function excluirTarefasController() {
-		echo json_encode(["mensagem" => "ola mundo"]);
-		exit;
 	}
 
 	private function validarTarefaController() {
@@ -46,17 +54,17 @@ class TarefasController {
 $tarefa = new TarefasController();
 
 switch ($tarefa->chamarFuncao) {
-	case "obterTarefasController":
-		return $tarefa->obterTarefasController();
+	case "listarTodos":
+		return $tarefa->listarTodos();
 		break;
-	case "cadastrarTarefasController":
-		return $tarefa->cadastrarTarefasController();
+	case "criar":
+		return $tarefa->criar();
 		break;
-	case "atualizarTarefasController":
-		return $tarefa->atualizarTarefasController();
+	case "atualizar":
+		return $tarefa->atualizar();
 		break;
-	case "excluirTarefasController":
-		return $tarefa->excluirTarefasController();
+	case "excluir":
+		return $tarefa->excluir();
 		break;
 	default: echo json_encode(["mensagem" => "Função não existe!"]);
 		break;

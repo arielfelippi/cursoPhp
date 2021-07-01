@@ -1,46 +1,48 @@
 <?php
 
-class ConexaoBanco {
+namespace backend\database;
 
-	protected $nomeServidor;
-	protected $nomeUsuario;
-	protected $senhaUsuario;
-	protected $nomeBanco;
-	protected $porta;
-	protected $conexao;
+use backend\exception\TraitExceptionJSON;
+
+class ConexaoBanco {
+	use TraitExceptionJSON;
+
+	protected $conexao = null;
 
 	public function __construct() {
-		$this->nomeServidor = "localhost";
-		$this->nomeUsuario = "mariadb";
-		$this->senhaUsuario = "asdf000";
-		$this->nomeBanco = "cursoPhp";
-		$this->porta = "3306";
 		$this->conectar();
 	}
 
 	private function conectar() {
+		try {
 
-	  // Criar conexão
-		$this->conexao = new mysqli($this->nomeServidor, $this->nomeUsuario, $this->senhaUsuario, "", $this->porta);
+			// Criar conexão
+			$this->conexao = new \mysqli(
+				ConfigurarBanco::obterNomeServidor(),
+				ConfigurarBanco::obterNomeUsuario(),
+				ConfigurarBanco::obterSenhaUsuario(),
+				"",
+				ConfigurarBanco::obterPorta()
+			);
 
-		if ($this->conexao->connect_error) {
-			die("Conexão falhou: " . $this->conexao->connect_error);
+			if ($this->conexao->connect_error) {
+				throw new \Exception("ConexaoBanco: Conexão falhou: " . $this->conexao->connect_error);
+			}
+		} catch (\Exception $error) {
+			echo $this->jsonException($error);
 		}
-
-		echo "Conexão com o banco estabelecida com sucesso.";
-
-		$this->criarBancoDeDados();
 	}
 
-	private function criarBancoDeDados() {
-		// Cria banco de dados se não existir
-		$sql = "CREATE DATABASE IF NOT EXISTS {$this->nomeBanco}";
-
-		if (!mysqli_query($this->conexao, $sql)) {
-			echo "Erro ao criar banco de dados: " . mysqli_error($this->conexao);
+	public function fecharConexao() {
+		try {
+			mysqli_close($this->conexao);
+		} catch (\Exception $error) {
+			echo $this->jsonException($error);
 		}
+	}
 
-		echo "<br> Banco de dados criado com sucesso.";
+	public static function obterConexao() {
+		return self::$conexao;
 	}
 
 }
