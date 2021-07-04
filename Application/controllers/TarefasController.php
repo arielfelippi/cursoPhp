@@ -3,6 +3,7 @@
 require_once "../../frontend/view/index.php";
 
 use backend\core\controller\IBaseController;
+use backend\models\TarefasModel;
 
 class TarefasController implements IBaseController {
 
@@ -22,7 +23,7 @@ class TarefasController implements IBaseController {
 	public function criar() {
 		$this->validarTarefaController();
 
-		return $this->tarefasModel->cadastrarTarefasModel($this->dadosTarefa);
+		return $this->tarefasModel->criar($this->dadosTarefa);
 	}
 
 	public function atualizar() {
@@ -36,8 +37,9 @@ class TarefasController implements IBaseController {
 	}
 
 	public function listarTodos() {
-		echo json_encode(["mensagem" => "ola mundo"]);
-		exit;
+		$todasTarefas = $this->tarefasModel->listarTodos();
+
+		return $todasTarefas;
 	}
 
 	public function excluirTarefasController() {

@@ -7,6 +7,12 @@ spl_autoload_register(
 
 		$root = "/var/www/html/cursoPhp/src/";
 
+		$iBase = "/var/www/html/cursoPhp/src/backend/core/controller/IBaseController.php";
+		$iBase = "/var/www/html/cursoPhp/src/backend/core/controller/IBaseModel.php";
+		if (file_exists($iBase)) {
+			require_once $iBase;
+		}
+
 		foreach ($aDiretorios as $dir) {
 			$fullPath = $root . $dir . "/"; // ...src/backend/
 

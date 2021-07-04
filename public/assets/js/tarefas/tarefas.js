@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 			var url = "../../backend/controllers/TarefasController.php/";
 			var dados = {
-				funcao: "cadastrarTarefasController",
+				funcao: "listarTodos",
 				dadosTarefa: dadosTarefaSubmit,
 			}
 
