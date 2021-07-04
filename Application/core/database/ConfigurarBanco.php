@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\database;
+namespace Application\core\database;
 
 class ConfigurarBanco {
 

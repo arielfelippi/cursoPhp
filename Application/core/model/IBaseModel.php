@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\core\model;
+namespace Application\core\model;
 
 interface IBaseModel {
 
@@ -11,7 +11,5 @@ interface IBaseModel {
 	public function atualizar(array $dados);
 
 	public function excluir(int $id);
-
-	public function listarTodos();
 
 }

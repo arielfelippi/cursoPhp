@@ -1,34 +1,53 @@
 <?php
 
-namespace backend\models;
+namespace Application\models;
 
-use backend\core\model\IBaseModel;
-use backend\database\ConexaoBanco;
+use Application\core\database\BancoDeDados;
+use Application\core\model\IBaseModel;
 
 class TarefasModel implements IBaseModel {
 
-	protected $conexao = null;
+	protected $bancoDeDados = null;
+	protected $tabela = "tarefas";
 
 	public function __construct() {
-		$this->conexao = ConexaoBanco::obterConexao();
+		$this->bancoDeDados = new BancoDeDados();
+	}
+
+	private function executar($sql) {
+		$this->bancoDeDados->executar($sql);
+
+		$dados = [];
+
+		if ($this->bancoDeDados->resultados) {
+			$dados = $this->bancoDeDados->resultados;
+		}
+
+		return $dados;
+	}
+
+	public function listarTodos() {
+		$sql = `SELECT * FROM {$this->tabela};`;
+
+		return $this->executar($sql);
 	}
 
 	public function listar($id) {
+		$sql = `SELECT * FROM {$this->tabela} WHERE id= {$id};`;
+
+		return $this->executar($sql);
+	}
+
+	public function excluir($id) {
+		$sql = `DELETE FROM {$this->tabela} WHERE id= {$id};`;
+
+		return $this->executar($sql);
 	}
 
 	public function criar($dadosTarefa) {
 	}
 
 	public function atualizar($dadosTarefa) {
-	}
-
-	public function excluir($id) {
-	}
-
-	public function listarTodos() {
-		$smt = $this->conexao->prepare("SELECT * FROM tarefas");
-
-		return $smt->rowCount();
 	}
 
 }

@@ -1,11 +1,11 @@
 <?php
 
-require_once "../../frontend/view/index.php";
+namespace Application\controller;
 
-use backend\core\controller\IBaseController;
-use backend\models\TarefasModel;
+use Application\core\controller\Controller;
+use Application\models\TarefasModel;
 
-class TarefasController implements IBaseController {
+class TarefasController extends Controller {
 
 	protected $dadosTarefa;
 	protected $tarefasModel;
@@ -15,6 +15,12 @@ class TarefasController implements IBaseController {
 		$this->dadosTarefa = $_POST["dadosTarefa"]; // Obtém os dados enviados pelo front para o back.
 		$this->chamarFuncao = $_POST["funcao"];
 		$this->tarefasModel = new TarefasModel();
+	}
+
+	public function index() {
+		$todasTarefas = $this->tarefasModel->listarTodos();
+
+		return $todasTarefas;
 	}
 
 	public function listar() {
@@ -36,40 +42,13 @@ class TarefasController implements IBaseController {
 		exit;
 	}
 
-	public function listarTodos() {
-		$todasTarefas = $this->tarefasModel->listarTodos();
-
-		return $todasTarefas;
-	}
-
 	public function excluirTarefasController() {
 	}
 
 	private function validarTarefaController() {
 		if (empty($this->dadosTarefa["nomeDaTarefa"])) {
-			throw new Exception("Controller: O nome da tarefa está em branco");
+			throw new \Exception("Controller: O nome da tarefa está em branco");
 		}
 	}
 
 }
-
-$tarefa = new TarefasController();
-
-switch ($tarefa->chamarFuncao) {
-	case "listarTodos":
-		return $tarefa->listarTodos();
-		break;
-	case "criar":
-		return $tarefa->criar();
-		break;
-	case "atualizar":
-		return $tarefa->atualizar();
-		break;
-	case "excluir":
-		return $tarefa->excluir();
-		break;
-	default: echo json_encode(["mensagem" => "Função não existe!"]);
-		break;
-}
-
-unset($tarefa);

@@ -2,9 +2,11 @@
 
 namespace Application\core;
 
+use Application\core\controller\Controller;
+
 /**
 * Esta classe é responsável por obter da URL o controller, método (ação) e os parâmetros
-* e verificar a existência dos mesmo.
+* e verificar a existência dos mesmos.
 */
 class App {
 
@@ -13,7 +15,6 @@ class App {
 	protected $page404 = false;
 	protected $params = [];
 
-	// Método construtor
 	public function __construct() {
 		$URL_ARRAY = $this->parseUrl();
 		$this->getControllerFromUrl($URL_ARRAY);
@@ -25,7 +26,7 @@ class App {
 	}
 
 	/**
-	* Este método pega as informações da URL (após o dominio do site) e retorna esses dados
+	* Este método pega as informações da URL (após o domínio do site) e retorna esses dados
 	*
 	* @return array
 	*/
@@ -35,7 +36,7 @@ class App {
 	}
 
 	/**
-	* Este método verifica se o array informado possui dados na psoição 0 (controlador)
+	* Este método verifica se o array informado possui dados na posição 0 (controlador)
 	* caso exista, verifica se existe um arquivo com aquele nome no diretório Application/controllers
 	* e instancia um objeto contido no arquivo, caso contrário a variável $page404 recebe true.
 	*
@@ -55,7 +56,7 @@ class App {
 	}
 
 	/**
-	* Este método verifica se o array informado possui dados na psoição 1 (método)
+	* Este método verifica se o array informado possui dados na posição 1 (método)
 	* caso exista, verifica se o método existe naquele determinado controlador
 	* e atribui a variável $method da classe.
 	*
@@ -75,8 +76,8 @@ class App {
 
 	/**
 	* Este método verifica se o array informador possui a quantidade de elementos maior que 2
-	* ($url[0] é o controller e $url[1] o método/ação a executar), caso seja, é atrbuido
-	* a variável $params da classe um novo array  apartir da posição 2 do $url
+	* ($url[0] é o controller e $url[1] o método/ação a executar), caso seja, é atribuído
+	* a variável $params da classe um novo array  a partir da posição 2 do $url
 	*
 	* @param  array  $url   Array contendo informações ou não do controlador, método e parâmetros
 	*/

@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\core\controller;
+namespace Application\core\controller;
 
 interface IBaseController {
 
@@ -11,7 +11,5 @@ interface IBaseController {
 	public function atualizar();
 
 	public function excluir();
-
-	public function listarTodos();
 
 }

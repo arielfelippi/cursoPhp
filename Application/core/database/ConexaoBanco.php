@@ -1,8 +1,8 @@
 <?php
 
-namespace backend\database;
+namespace Application\core\database;
 
-use backend\exception\TraitExceptionJSON;
+use Application\core\exception\TraitExceptionJSON;
 
 class ConexaoBanco {
 	use TraitExceptionJSON;

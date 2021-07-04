@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\exception;
+namespace Application\core\exception;
 
 trait TraitExceptionJSON {
 

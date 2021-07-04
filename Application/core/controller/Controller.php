@@ -1,14 +1,15 @@
 <?php
 
-namespace Application\core;
+namespace Application\core\controller;
 
+use Application\core\controller\IBaseController;
 use Application\models\Users;
 
 /**
 * Esta classe é responsável por instanciar um model e chamar a view correta
 * passando os dados que serão usados.
 */
-class Controller {
+class Controller implements IBaseController {
 
 	/**
 	* Este método é responsável por chamar uma determinada view (página).
@@ -37,6 +38,20 @@ class Controller {
 	*/
 	public function pageNotFound() {
 		$this->view('erro404');
+	}
+
+	// Métodos padrão conhecidos como CRUD (Create, Read, Update e Delete).
+
+	public function listar() {
+	}
+
+	public function criar() {
+	}
+
+	public function atualizar() {
+	}
+
+	public function excluir() {
 	}
 
 }

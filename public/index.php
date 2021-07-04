@@ -15,7 +15,6 @@
   ini_set('display_errors', false);
 
 	use Application\core\App;
-	use Application\core\controller\Controller;
 
 	$app = new App();
 
