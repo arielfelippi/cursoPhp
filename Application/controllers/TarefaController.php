@@ -13,7 +13,7 @@ class TarefaController extends Controller implements IBaseController {
 	}
 
 	public function index() { // index == listarTodos
-		$data = ['msg' => "hello world!"];//$this->tarefasModel->listarTodos();
+		$data = $this->tarefasModel->listarTodos();
 		$this->view('tarefas/tarefaView', $data);
 	}
 
@@ -39,9 +39,6 @@ class TarefaController extends Controller implements IBaseController {
 	}
 
 	// Fim CRUD.
-
-	public function excluirTarefasController() {
-	}
 
 	private function validarTarefaController($dados) {
 		try {
