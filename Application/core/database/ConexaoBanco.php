@@ -8,6 +8,7 @@ class ConexaoBanco {
 	use TraitExceptionJSON;
 
 	protected $conexao = null;
+	protected $nomeBanco = "";
 
 	public function __construct() {
 		$this->conectar();
@@ -15,14 +16,16 @@ class ConexaoBanco {
 
 	private function conectar() {
 		try {
+			$configurarBanco = new ConfigurarBanco();
+			$this->nomeBanco = $configurarBanco->obterNomeBanco();
 
 			// Criar conexão
 			$this->conexao = new \mysqli(
-				ConfigurarBanco::obterNomeServidor(),
-				ConfigurarBanco::obterNomeUsuario(),
-				ConfigurarBanco::obterSenhaUsuario(),
+				$configurarBanco->obterNomeServidor(),
+				$configurarBanco->obterNomeUsuario(),
+				$configurarBanco->obterSenhaUsuario(),
 				"",
-				ConfigurarBanco::obterPorta()
+				$configurarBanco->obterPorta()
 			);
 
 			if ($this->conexao->connect_error) {
@@ -41,8 +44,12 @@ class ConexaoBanco {
 		}
 	}
 
-	public static function obterConexao() {
-		return self::$conexao;
+	public function obterConexao() {
+		return $this->conexao;
+	}
+
+	public function obterNomeBanco() {
+		return $this->nomeBanco;
 	}
 
 }

@@ -4,9 +4,9 @@ namespace Application\core\model;
 
 interface IBaseModel {
 
-	public function listar(int $id);
-
 	public function criar(array $dados);
+
+	public function listar(int $id);
 
 	public function atualizar(array $dados);
 

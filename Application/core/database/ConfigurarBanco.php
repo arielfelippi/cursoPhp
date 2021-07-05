@@ -10,32 +10,32 @@ class ConfigurarBanco {
 	protected $nomeBanco;
 	protected $porta;
 
-	private function __construct() {
+	public function __construct() {
 		$this->nomeServidor = "localhost";
-		$this->nomeUsuario = "mariadb";
-		$this->senhaUsuario = "asdf000";
+		$this->nomeUsuario = "root";
+		$this->senhaUsuario = "";
 		$this->nomeBanco = "cursoPhp";
-		$this->porta = "3306";
+		$this->porta = 3306;
 	}
 
-	public static function obterNomeServidor() {
-		return self::$nomeServidor;
+	public function obterNomeServidor() {
+		return $this->nomeServidor;
 	}
 
-	public static function obterNomeUsuario() {
-		return self::$nomeUsuario;
+	public function obterNomeUsuario() {
+		return $this->nomeUsuario;
 	}
 
-	public static function obterSenhaUsuario() {
-		return self::$senhaUsuario;
+	public function obterSenhaUsuario() {
+		return $this->senhaUsuario;
 	}
 
-	public static function obterNomeBanco() {
-		return self::$nomeBanco;
+	public function obterNomeBanco() {
+		return $this->nomeBanco;
 	}
 
-	public static function obterPorta() {
-		return self::$porta;
+	public function obterPorta() {
+		return $this->porta;
 	}
 
 }

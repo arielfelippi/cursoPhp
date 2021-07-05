@@ -1,36 +1,22 @@
 <?php
 
-spl_autoload_register(
-	function ($className) {
-		$aDiretorios = ["backend", "frontend"];
-		$aSubDiretorios = ["database", "models", "controllers", "view"];
+spl_autoload_register(function ($filename) {
+	$file = '..' . DIRECTORY_SEPARATOR . $filename . '.php';
 
-		$root = "/var/www/html/cursoPhp/src/";
+	if (DIRECTORY_SEPARATOR === '/') {
+		$file = str_replace('\\', '/', $file);
+	}
 
-		$iBase = "/var/www/html/cursoPhp/src/backend/core/controller/IBaseController.php";
-		$iBase = "/var/www/html/cursoPhp/src/backend/core/controller/IBaseModel.php";
-		if (file_exists($iBase)) {
-			require_once $iBase;
-		}
+	if (file_exists($file)) {
+		require $file;
+	} else {
+		$location = (strpos($filename, "Controller") !== false) ? "controllers" : "models";
+		$file = "../Application/{$location}/{$filename}.php";
 
-		foreach ($aDiretorios as $dir) {
-			$fullPath = $root . $dir . "/"; // ...src/backend/
-
-			$carregou = false;
-
-			foreach ($aSubDiretorios as $currentDir) {
-				$dirLoad = $fullPath . $currentDir . "/"; // ...backend/Models
-
-				if (file_exists($dirLoad . "$className.php")) {
-					require_once $dirLoad . "$className.php"; // ...Models/TarefasModel.php
-					$carregou = true;
-					break; // "/var/www/html/cursoPhp/src/backend/Models/TarefasModel.php"
-				}
-			}
-
-			if ($carregou) {
-				break;
-			}
+		if (file_exists($file)) {
+			require $file;
+		} else {
+			echo "Erro ao importar o arquivo! <br/>" . $filename;
 		}
 	}
-);
+});

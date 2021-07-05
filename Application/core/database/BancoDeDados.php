@@ -7,25 +7,40 @@ use Application\core\exception\TraitExceptionJSON;
 class BancoDeDados {
 	use TraitExceptionJSON;
 
-	protected $conexao = null;
-	public $resultados = null;
+	protected $nomeBanco = "";
+	protected $objMysqli = null;
+	public $resultados = [];
 	public $nroDeLinhas = 0;
 
 	public function __construct() {
-		$this->conexao = ConexaoBanco::obterConexao();
-		$this->criarBancoDeDados();
+		$conexaoBanco = new ConexaoBanco();
+
+		$this->nomeBanco = $conexaoBanco->obterNomeBanco();
+		$this->objMysqli = $conexaoBanco->obterConexao();
+		$this->selecionarBanco();
+	}
+
+	private function selecionarBanco() {
+		try {
+			if (!$this->objMysqli->select_db($this->nomeBanco)) {
+				$this->criarBancoDeDados();
+			}
+		} catch (\Exception $error) {
+			echo $this->jsonException($error);
+		}
 	}
 
 	private function criarBancoDeDados() {
 		try {
-			$nomeBanco = ConfigurarBanco::obterNomeBanco();
 
 			// Instrução SQL que cria o banco de dados se não existir
-			$sql = `CREATE DATABASE IF NOT EXISTS {$nomeBanco}`;
+			$sql = "CREATE DATABASE IF NOT EXISTS {$this->nomeBanco}";
 
-			if (!mysqli_query($this->conexao, $sql)) {
-				throw new \Exception("BancoDeDados: Erro ao criar banco de dados: " . mysqli_error($this->conexao));
+			if (!$this->objMysqli->query($sql)) {
+				throw new \Exception("BancoDeDados: Erro ao criar banco de dados: " . mysqli_error($this->objMysqli));
 			}
+
+			$this->selecionarBanco();
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
 		}
@@ -33,7 +48,7 @@ class BancoDeDados {
 
 	public function executar($sql) {
 		try {
-			$this->resultados = $this->conexao->query($sql); // mysqli_query($this->conexao, $sql);
+			$this->resultados = $this->objMysqli->query($sql); // mysqli_query($this->objMysqli, $sql);
 			$this->nroDeLinhas = $this->resultados->num_rows(); // mysqli_num_rows($this->resultados);
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);

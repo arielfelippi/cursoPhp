@@ -4,12 +4,12 @@ namespace Application\core\controller;
 
 interface IBaseController {
 
-	public function listar();
+	public function criar(array $dados);
 
-	public function criar();
+	public function listar(int $id);
 
-	public function atualizar();
+	public function atualizar(array $dados);
 
-	public function excluir();
+	public function excluir(int $id);
 
 }

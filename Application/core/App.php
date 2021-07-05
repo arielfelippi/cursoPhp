@@ -2,15 +2,13 @@
 
 namespace Application\core;
 
-use Application\core\controller\Controller;
-
 /**
 * Esta classe é responsável por obter da URL o controller, método (ação) e os parâmetros
 * e verificar a existência dos mesmos.
 */
 class App {
 
-	protected $controller = 'Home';
+	protected $controller = 'TarefaController';
 	protected $method = 'index';
 	protected $page404 = false;
 	protected $params = [];
@@ -31,7 +29,12 @@ class App {
 	* @return array
 	*/
 	private function parseUrl() {
-		$REQUEST_URI = explode('/', substr(filter_input(INPUT_SERVER, 'REQUEST_URI'), 1));
+		$str = filter_input("localhost/cursoPhp/public/", 'REQUEST_URI');
+
+		$substr = substr($str, 1);
+
+		$REQUEST_URI = explode('/', $substr);
+
 		return $REQUEST_URI;
 	}
 

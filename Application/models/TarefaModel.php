@@ -5,7 +5,7 @@ namespace Application\models;
 use Application\core\database\BancoDeDados;
 use Application\core\model\IBaseModel;
 
-class TarefasModel implements IBaseModel {
+class TarefaModel implements IBaseModel {
 
 	protected $bancoDeDados = null;
 	protected $tabela = "tarefas";
@@ -19,7 +19,7 @@ class TarefasModel implements IBaseModel {
 
 		$dados = [];
 
-		if ($this->bancoDeDados->resultados) {
+		if ($this->bancoDeDados->resultados) { // Só entra aqui se executou certo a a query e tiver resultado.
 			$dados = $this->bancoDeDados->resultados;
 		}
 
@@ -27,19 +27,19 @@ class TarefasModel implements IBaseModel {
 	}
 
 	public function listarTodos() {
-		$sql = `SELECT * FROM {$this->tabela};`;
+		$sql = "SELECT * FROM {$this->tabela};";
 
 		return $this->executar($sql);
 	}
 
 	public function listar($id) {
-		$sql = `SELECT * FROM {$this->tabela} WHERE id= {$id};`;
+		$sql = "SELECT * FROM {$this->tabela} WHERE id= {$id};";
 
 		return $this->executar($sql);
 	}
 
 	public function excluir($id) {
-		$sql = `DELETE FROM {$this->tabela} WHERE id= {$id};`;
+		$sql = "DELETE FROM {$this->tabela} WHERE id= {$id};";
 
 		return $this->executar($sql);
 	}
