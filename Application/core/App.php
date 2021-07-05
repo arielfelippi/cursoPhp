@@ -2,6 +2,9 @@
 
 namespace Application\core;
 
+use Application\controllers;
+use Application\models;
+
 /**
 * Esta classe é responsável por obter da URL o controller, método (ação) e os parâmetros
 * e verificar a existência dos mesmos.
@@ -29,7 +32,7 @@ class App {
 	* @return array
 	*/
 	private function parseUrl() {
-		$str = filter_input("localhost/cursoPhp/public/", 'REQUEST_URI');
+		$str = filter_input(INPUT_SERVER, 'REQUEST_URI');
 
 		$substr = substr($str, 1);
 
@@ -54,7 +57,7 @@ class App {
 			}
 		}
 
-		require '../Application/controllers/' . $this->controller . '.php';
+		// require '../Application/controllers/' . $this->controller . '.php';
 		$this->controller = new $this->controller();
 	}
 

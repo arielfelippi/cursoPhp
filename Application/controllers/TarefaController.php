@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\controllers;
+// namespace Application\controllers;
 
 use Application\core\controller\Controller;
 use Application\core\controller\IBaseController;

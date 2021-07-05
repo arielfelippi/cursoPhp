@@ -11,11 +11,11 @@ class ConfigurarBanco {
 	protected $porta;
 
 	public function __construct() {
-		$this->nomeServidor = "localhost";
-		$this->nomeUsuario = "root";
-		$this->senhaUsuario = "";
-		$this->nomeBanco = "cursoPhp";
-		$this->porta = 3306;
+		$this->nomeServidor = SERVER_NAME;
+		$this->nomeUsuario = USER_DB;
+		$this->senhaUsuario = PASSWORD_DB;
+		$this->nomeBanco = NAME_DB;
+		$this->porta = PORT_DB;
 	}
 
 	public function obterNomeServidor() {

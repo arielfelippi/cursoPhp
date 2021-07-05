@@ -9,7 +9,6 @@
 	<table id="idTabelaTarefas" class="table table-responsive table-striped table-hover">
 	</table>
 </div>
-<script src="../../../public/assets/js/tarefas/tarefas.js"></script>
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -68,3 +67,4 @@
 		</div>
 	</div>
 </div>
+<script src="/assets/js/tarefas/tarefas.js"></script>
