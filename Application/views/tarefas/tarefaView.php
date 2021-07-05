@@ -1,14 +1,8 @@
-
 <br />
 <div class="container">
 
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Criar
 		tarefa</button>
-		<?php
-			foreach ($data as $key => $value) {
-				echo $key . ": " . $value->titulo;
-			}
-		 ?>
 	<br />
 	<br />
 	<table id="idTabelaTarefas" class="table table-responsive table-striped table-hover">
@@ -72,4 +66,5 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">var paramPHP = '<?php echo json_encode($data); ?>';</script>
 <script src="/assets/js/tarefas/tarefas.js"></script>

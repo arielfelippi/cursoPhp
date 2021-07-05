@@ -69,13 +69,13 @@ class TarefaModel implements IBaseModel {
 	// CRUD
 
 	public function listar($id) {
-		$sql = "SELECT * FROM {$this->tabela} WHERE id= {$id};";
+		$sql = "SELECT * FROM {$this->tabela} WHERE id= '{$id}';";
 
 		return $this->executar($sql);
 	}
 
 	public function excluir($id) {
-		$sql = "DELETE FROM {$this->tabela} WHERE id= {$id};";
+		$sql = "DELETE FROM {$this->tabela} WHERE id= '{$id}';";
 
 		return $this->executar($sql);
 	}

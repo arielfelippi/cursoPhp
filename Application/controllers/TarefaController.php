@@ -20,6 +20,18 @@ class TarefaController extends Controller implements IBaseController {
 	// Métodos padrão conhecidos como CRUD (Create, Read, Update e Delete).
 
 	public function listar($id = 0) {
+		try {
+			if (is_numeric($id) && $id <= 0) {
+				throw new MyException("Listar tarefa: O id da tarefa é inválido.");
+			}
+		} catch (MyException $error) {
+			echo $error->jsonException($error);
+			die();
+		}
+
+		$dados = $this->tarefasModel->listar($id);
+		echo json_encode($dados);
+		exit();
 	}
 
 	public function criar($dados = []) {

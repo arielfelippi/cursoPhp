@@ -28,3 +28,5 @@
   ?>
   </body>
 </html>
+<script src="/assets/js/moment.js"></script>
+<script src="/assets/js/functions.js"></script>

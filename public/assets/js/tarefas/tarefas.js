@@ -1,7 +1,6 @@
 $(document).ready(function () {
-
-	var dadosTarefasAtual = dadosTabela(); // Inicializando com todos os dados
 	var tabelaTarefas = $("#idTabelaTarefas");
+	var dadosTarefasAtual = JSON.parse(paramPHP); // Inicializando com todos os dados vindos do PHP
 	montarTabela();
 
 	$(".btnInserir").on("click", function () {
@@ -19,7 +18,7 @@ $(document).ready(function () {
 				dataDaTarefa: $("#dataDaTarefa").val(),
 			};
 
-			var url = "../../backend/controllers/TarefasController.php/";
+			var url = "/TarefaController/listar/1";
 			var dados = {
 				funcao: "listarTodos",
 				dadosTarefa: dadosTarefaSubmit,
@@ -36,19 +35,6 @@ $(document).ready(function () {
 					var msg = "CallBack do FAIL vinda do PHP (response): " + response;
 					alert(msg);
 				});
-
-			// $.ajax({
-			// 	url: "test.php",
-			// 	type: "post",
-			// 	data: dadosTarefaSubmit
-			// })
-			// .fail(function( response ) {
-			// 	alert( "FALHOU o POST para o PHP: " + response );
-			// })
-			// .done(function( response ) {
-			// 	alert( "CallBack do DONE vinda do PHP (response): " + response );
-			// });
-
 		});
 
 	});
@@ -81,22 +67,7 @@ $(document).ready(function () {
 		// $botaoExcluir.closest('tr').remove();
 	});
 
-
-	function dadosTabela() {
-		var dadosTarefa = [];
-
-		dadosTarefa = [
-			{ idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" },
-			{ idDaTarefa: 4, nomeDaTarefa: "tarefa2", usuarioDaTarefa: "tiago", dataDaTarefa: "18/05/2021" },
-			{ idDaTarefa: 5, nomeDaTarefa: "tarefa3", usuarioDaTarefa: "sadi", dataDaTarefa: "18/05/2021" },
-			{ idDaTarefa: 6, nomeDaTarefa: "tarefa4", usuarioDaTarefa: "michel", dataDaTarefa: "25/05/2021" },
-			{ idDaTarefa: 7, nomeDaTarefa: "tarefa5", usuarioDaTarefa: "gabriel", dataDaTarefa: "25/05/2021" },
-		];
-
-		return dadosTarefa;
-	}
-
-	function montarTabela(cxdfdssdf) {
+	function montarTabela() {
 		var cabecalho = montarCabecalhoTabela();
 		var corpo = montarCorpoTabela();
 		var htmlDaTabela = (cabecalho + corpo);
@@ -108,13 +79,13 @@ $(document).ready(function () {
 	function montarCabecalhoTabela() {
 		var cabecalho = (
 			'<thead class="table-dark">' +
-			'<tr>' +
-			'<th scope="col">Id</th>' +
-			'<th scope="col">Tarefa</th>' +
-			'<th scope="col">Usuário</th>' +
-			'<th scope="col">Data</th>' +
-			'<th scope="col">Ações</th>' +
-			'</tr>' +
+				'<tr>' +
+					'<th scope="col">Id</th>' +
+					'<th scope="col">Tarefa</th>' +
+					'<th scope="col">Usuário</th>' +
+					'<th scope="col">Data</th>' +
+					'<th scope="col">Ações</th>' +
+				'</tr>' +
 			'</thead>'
 		);
 
@@ -128,15 +99,15 @@ $(document).ready(function () {
 		$.each(tarefas, function (idx, tarefa) {
 			corpo += (
 				'<tr>' +
-				'<td>' + tarefa.idDaTarefa + '</td>' +
-				'<td>' + tarefa.nomeDaTarefa + '</td>' +
-				'<td>' + tarefa.usuarioDaTarefa + '</td>' +
-				'<td>' + tarefa.dataDaTarefa + '</td>' +
-				'<td>' +
-				'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id + '>Editar</button>' +
-				'&nbsp;' +
-				'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id + '>Excluir</button>' +
-				'</td>' +
+					'<td>' + tarefa.id + '</td>' +
+					'<td>' + tarefa.titulo + '</td>' +
+					'<td>' + tarefa.usuario + '</td>' +
+					'<td>' + formatarDataHoraBr(tarefa.data_criacao) + '</td>' +
+					'<td>' +
+						'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id + '>Editar</button>' +
+						'&nbsp;' +
+						'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id + '>Excluir</button>' +
+					'</td>' +
 				'</tr>'
 			);
 		});
@@ -168,3 +139,19 @@ $(document).ready(function () {
 	}
 
 });
+
+/*
+	function dadosTabela() {
+		var dadosTarefa = [];
+
+		dadosTarefa = [
+			{ idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" },
+			{ idDaTarefa: 4, nomeDaTarefa: "tarefa2", usuarioDaTarefa: "tiago", dataDaTarefa: "18/05/2021" },
+			{ idDaTarefa: 5, nomeDaTarefa: "tarefa3", usuarioDaTarefa: "sadi", dataDaTarefa: "18/05/2021" },
+			{ idDaTarefa: 6, nomeDaTarefa: "tarefa4", usuarioDaTarefa: "michel", dataDaTarefa: "25/05/2021" },
+			{ idDaTarefa: 7, nomeDaTarefa: "tarefa5", usuarioDaTarefa: "gabriel", dataDaTarefa: "25/05/2021" },
+		];
+
+		return dadosTarefa;
+	}
+*/
