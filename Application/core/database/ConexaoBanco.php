@@ -33,6 +33,7 @@ class ConexaoBanco {
 			}
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
+			die();
 		}
 	}
 
@@ -41,6 +42,7 @@ class ConexaoBanco {
 			mysqli_close($this->conexao);
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
+			die();
 		}
 	}
 

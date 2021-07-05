@@ -1,9 +1,8 @@
 <?php
 
-// namespace Application\controllers;
-
 use Application\core\controller\Controller;
 use Application\core\controller\IBaseController;
+use Application\core\exception\MyException;
 
 class TarefaController extends Controller implements IBaseController {
 
@@ -15,7 +14,6 @@ class TarefaController extends Controller implements IBaseController {
 
 	public function index() { // index == listarTodos
 		$data = ['msg' => "hello world!"];//$this->tarefasModel->listarTodos();
-
 		$this->view('tarefas/tarefaView', $data);
 	}
 
@@ -46,8 +44,13 @@ class TarefaController extends Controller implements IBaseController {
 	}
 
 	private function validarTarefaController($dados) {
-		if (empty($dados)) {
-			throw new \Exception("Controller: O nome da tarefa está em branco");
+		try {
+			if (empty($dados)) {
+				throw new MyException("Controller: O nome da tarefa está em branco");
+			}
+		} catch (MyException $error) {
+			echo $error->jsonException($error);
+			die();
 		}
 	}
 

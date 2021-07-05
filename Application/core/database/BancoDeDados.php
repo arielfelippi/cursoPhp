@@ -27,6 +27,7 @@ class BancoDeDados {
 			}
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
+			die();
 		}
 	}
 
@@ -43,15 +44,24 @@ class BancoDeDados {
 			$this->selecionarBanco();
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
+			die();
 		}
 	}
 
 	public function executar($sql) {
 		try {
-			$this->resultados = $this->objMysqli->query($sql); // mysqli_query($this->objMysqli, $sql);
-			$this->nroDeLinhas = $this->resultados->num_rows(); // mysqli_num_rows($this->resultados);
+			$this->resultados = $this->objMysqli->query($sql);
+
+			if (!is_scalar($this->resultados) && $this->resultados->num_rows) {
+				$this->nroDeLinhas = $this->resultados->num_rows;
+			}
+
+			if (!empty($this->objMysqli->error) && $this->objMysqli->errno > 0) {
+				throw new \Exception("BancoDeDados - executar sql: {$this->objMysqli->errno}, {$this->objMysqli->error}, {$sql}");
+			}
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
+			die();
 		}
 	}
 
