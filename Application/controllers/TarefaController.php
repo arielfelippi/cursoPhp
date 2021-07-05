@@ -14,7 +14,7 @@ class TarefaController extends Controller implements IBaseController {
 	}
 
 	public function index() { // index == listarTodos
-		$data = [];//$this->tarefasModel->listarTodos();
+		$data = ['msg' => "hello world!"];//$this->tarefasModel->listarTodos();
 
 		$this->view('tarefas/tarefaView', $data);
 	}

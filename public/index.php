@@ -14,13 +14,7 @@
   error_reporting(E_ALL);
   ini_set('display_errors', false);
 
-  define("PROJECT_NAME", "../cursoPhp");
-  define("SERVER_NAME", "localhost");
-  define("USER_DB", "root");
-  define("PASSWORD_DB", "");
-  define("NAME_DB", "cursoPhp");
-  define("PORT_DB", 3306);
-
+  require '../Application/config/Constantes.php';
   require '../Application/config/Autoload.php';
 
   use Application\core\App;

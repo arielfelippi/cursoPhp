@@ -4,6 +4,7 @@
 
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Criar
 		tarefa</button>
+		<?php echo $data["msg"];?>
 	<br />
 	<br />
 	<table id="idTabelaTarefas" class="table table-responsive table-striped table-hover">

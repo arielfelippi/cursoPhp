@@ -26,12 +26,12 @@ class Controller {
 	* @param  array   $data   São os dados que serão exibido na view
 	*/
 	public function view(string $view, $data = []) {
-		$file = "../Application/view/{$view}.php";
+		$file = "../Application/views/{$view}.php";
 
 		if (file_exists($file)) {
 			require $file;
 		} else {
-			$file = PROJECT_NAME . "/Application/view/{$view}.php";
+			$file = PROJECT_NAME . "/Application/views/{$view}.php";
 			require $file;
 		}
 	}
