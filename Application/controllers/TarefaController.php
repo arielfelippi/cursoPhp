@@ -12,9 +12,11 @@ class TarefaController extends Controller implements IBaseController {
 		$this->tarefasModel = $this->model('TarefaModel'); // é retornado o model TarefaModel()
 	}
 
-	public function index() { // index == listarTodos
-		$data = $this->tarefasModel->listarTodos();
-		$this->view('tarefas/tarefaView', $data);
+	// index == listarTodos
+	public function index() {
+		$data["paginaMeio"] = "tarefas/tarefaView";
+		$data["dados"] = $this->tarefasModel->listarTodos();
+		$this->view("PrincipalView", $data);
 	}
 
 	// Métodos padrão conhecidos como CRUD (Create, Read, Update e Delete).
@@ -30,6 +32,7 @@ class TarefaController extends Controller implements IBaseController {
 		}
 
 		$dados = $this->tarefasModel->listar($id);
+		header('Content-Type: application/json; charset=utf-8');
 		echo json_encode($dados);
 		exit();
 	}

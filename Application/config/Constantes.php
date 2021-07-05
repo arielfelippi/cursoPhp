@@ -1,5 +1,6 @@
 <?php
 
+  define("SYSTEM_NAME", "Sistema Lista de Tarefas");
   define("PROJECT_NAME", "../cursoPhp");
   //
   define("SERVER_NAME", "localhost");

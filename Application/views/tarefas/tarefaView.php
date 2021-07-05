@@ -1,7 +1,7 @@
 <br />
 <div class="container">
 
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Criar
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="far fa-plus-square"></i> Criar
 		tarefa</button>
 	<br />
 	<br />

@@ -104,9 +104,9 @@ $(document).ready(function () {
 					'<td>' + tarefa.usuario + '</td>' +
 					'<td>' + formatarDataHoraBr(tarefa.data_criacao) + '</td>' +
 					'<td>' +
-						'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id + '>Editar</button>' +
+						'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id + '><i class="far fa-edit"></i> Editar</button>' +
 						'&nbsp;' +
-						'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id + '>Excluir</button>' +
+						'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id + '><i class="far fa-trash-alt"></i> Excluir</button>' +
 					'</td>' +
 				'</tr>'
 			);
