@@ -67,7 +67,7 @@ class BancoDeDados {
 		}
 	}
 
-	public function prepararDadosRetorno() {
+	private function prepararDadosRetorno() {
 		$dados = [];
 
 		$obj = (object) $this->resultados;
