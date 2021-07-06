@@ -36,7 +36,7 @@ class TarefaModel implements IBaseModel {
 				`status` TINYINT NOT NULL,
 				`prioridade` TINYINT NOT NULL,
 				`usuario` VARCHAR(50) DEFAULT NULL,
-				`description` TEXT DEFAULT NULL,
+				`descricao` TEXT DEFAULT NULL,
 				`data_criacao` TIMESTAMP DEFAULT NULL,
 				`data_atualizacao` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				`usuario_atualizacao` VARCHAR(50) DEFAULT NULL
@@ -53,7 +53,7 @@ class TarefaModel implements IBaseModel {
 
 		$dados = [];
 
-		if (!is_scalar($this->bancoDeDados->resultados)) { // Só entra aqui se executou certo a a query e tiver resultado.
+		if ($this->bancoDeDados->nroDeLinhas > 0) {
 			$dados = $this->bancoDeDados->resultados;
 		}
 
@@ -61,7 +61,7 @@ class TarefaModel implements IBaseModel {
 	}
 
 	public function listarTodos() {
-		$sql = "SELECT * FROM {$this->tabela};";
+		$sql = ("SELECT * FROM {$this->tabela};");
 
 		return $this->executar($sql);
 	}
@@ -69,21 +69,46 @@ class TarefaModel implements IBaseModel {
 	// CRUD
 
 	public function listar($id) {
-		$sql = "SELECT * FROM {$this->tabela} WHERE id= '{$id}';";
+		$sql = ("SELECT * FROM {$this->tabela} WHERE id= '{$id}';");
 
 		return $this->executar($sql);
 	}
 
 	public function excluir($id) {
-		$sql = "DELETE FROM {$this->tabela} WHERE id= '{$id}';";
+		$sql = ("DELETE FROM {$this->tabela} WHERE id= '{$id}';");
 
 		return $this->executar($sql);
 	}
 
-	public function criar($dadosTarefa) {
+	public function criar($dados) {
+		$campos = implode(', ', array_keys($dados));
+		$valores = $this->implodeSanitize($dados);
+
+		$data_criacao = date("Y-m-d H:i:s");
+
+		$sql = (
+			"INSERT INTO {$this->tabela} (${campos}, data_criacao) VALUES (${valores}, '${data_criacao}');"
+		);
+
+		// "INSERT INTO tarefas (titulo, data_inicio, data_fim, status, prioridade, usuario, descricao, data_criacao)
+		// VALUES ('Teste da tarefa', '2021-07-05', '2021-07-06', '1', '5', 'ariel.felippi', 'teste tarefa.', '2021-07-06 19:33:12');"
+
+		return $this->executar($sql);
 	}
 
 	public function atualizar($dadosTarefa) {
+	}
+
+	// Fim CRUD.
+
+	private function implodeSanitize($dados) {
+		$add_quotes = function ($str) {
+			return sprintf("'%s'", $str);
+		};
+
+		$dadosTmp = implode(', ', array_map($add_quotes, $dados));
+
+		return $dadosTmp;
 	}
 
 }

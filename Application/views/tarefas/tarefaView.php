@@ -12,7 +12,7 @@
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 	aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="staticBackdropLabel">Cadastrar tarefa</h5>
@@ -24,34 +24,63 @@
 				<form id="formTarefas" class="row g-3 needs-validation" novalidate>
 
 					<div class="col-md-3">
-						<label for="idDaTarefa" class="form-label">Id da Tarefa</label>
-						<input type="number" min="1" class="form-control" id="idDaTarefa" required>
-						<div class="invalid-feedback">
-							Informe um id para a tarefa
-						</div>
+						<label for="id" class="form-label">Id da Tarefa</label>
+						<input type="number" min="1" readonly class="form-control" id="id" name="id" required>
 					</div>
 
 					<div class="col-md-9">
-						<label for="nomeDaTarefa" class="form-label">Nome da tarefa</label>
-						<input type="text" class="form-control" id="nomeDaTarefa" required>
+						<label for="titulo" class="form-label">Título</label>
+						<input type="text" class="form-control" id="titulo" name="titulo" required>
 						<div class="invalid-feedback">
-							Informe um nome para a tarefa
+							Informe um titulo para a tarefa
 						</div>
 					</div>
 
 					<div class="col-md-6">
-						<label for="usuarioDaTarefa" class="form-label">Usuário</label>
-						<input type="text" class="form-control" id="usuarioDaTarefa" required>
+						<label for="data_inicio" class="form-label">Data de inicio</label>
+						<input type="date" class="form-control" id="data_inicio" name="data_inicio" required>
+						<div class="invalid-feedback">
+							Informe uma data de inicio para a tarefa
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<label for="data_fim" class="form-label">Data fim</label>
+						<input type="date" class="form-control" id="data_fim" name="data_fim" required>
+						<div class="invalid-feedback">
+							Informe uma data fim para a tarefa
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<label for="status" class="form-label">Status</label>
+						<input type="number" min="1" max="5" class="form-control" id="status" name="status" required>
+						<div class="invalid-feedback">
+							Selecione um status para a tarefa
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<label for="prioridade" class="form-label">Prioridade</label>
+						<input type="number" min="1" max="5" class="form-control" id="prioridade" name="prioridade" required>
+						<div class="invalid-feedback">
+							Selecione uma prioridade para a tarefa
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<label for="usuario" class="form-label">Usuário</label>
+						<input type="text" class="form-control" id="usuario" name="usuario" required>
 						<div class="invalid-feedback">
 							Informe um usuário para a tarefa
 						</div>
 					</div>
 
-					<div class="col-md-6">
-						<label for="dataDaTarefa" class="form-label">Data</label>
-						<input type="date" class="form-control" id="dataDaTarefa" required>
+					<div class="col-md-12">
+						<label for="descricao" class="form-label">Descrição</label>
+						<textarea class="form-control" id="descricao" name="descricao" rows="5" required></textarea>
 						<div class="invalid-feedback">
-							Informe uma data para a tarefa
+							Informe uma descrição para a tarefa
 						</div>
 					</div>
 

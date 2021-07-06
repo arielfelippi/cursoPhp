@@ -10,25 +10,22 @@ $(document).ready(function () {
 		$("#formTarefas").submit(function (event) {
 			event.preventDefault();
 
-			// { idDaTarefa: 3, nomeDaTarefa: "tarefa1", usuarioDaTarefa: "ariel", dataDaTarefa: "18/05/2021" }
-			var dadosTarefaSubmit = {
-				idDaTarefa: $("#idDaTarefa").val(),
-				nomeDaTarefa: $("#nomeDaTarefa").val(),
-				usuarioDaTarefa: $("#usuarioDaTarefa").val(),
-				dataDaTarefa: $("#dataDaTarefa").val(),
+			var dadosTarefa = {
+				titulo: $("#titulo").val(),
+				data_inicio: $("#data_inicio").val(),
+				data_fim: $("#data_fim").val(),
+				status: $("#status").val(),
+				prioridade: $("#prioridade").val(),
+				usuario: $("#usuario").val(),
+				descricao: $("#descricao").val(),
 			};
 
-			var url = "/TarefaController/listar/1";
-			var dados = {
-				funcao: "listarTodos",
-				dadosTarefa: dadosTarefaSubmit,
-			}
+			var url = "/TarefaController/criar";
 
-			$.post(url, dados)
+			$.post(url, dadosTarefa)
 				.done(function (response) {
 					console.log("done: " + response);
 					var msg = "CallBack do DONE vinda do PHP (response): " + response;
-					alert(msg);
 				})
 				.fail(function (response) {
 					console.log("fail: " + response);

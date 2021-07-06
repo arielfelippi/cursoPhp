@@ -52,15 +52,14 @@ class BancoDeDados {
 		try {
 			$this->resultados = $this->objMysqli->query($sql, MYSQLI_USE_RESULT);
 
-			if (!is_scalar($this->resultados) && $this->resultados->num_rows) {
-				$this->nroDeLinhas = $this->resultados->num_rows;
-			}
-
 			if (!empty($this->objMysqli->error) && $this->objMysqli->errno > 0) {
 				throw new \Exception("BancoDeDados - executar sql: {$this->objMysqli->errno}, {$this->objMysqli->error}, {$sql}");
 			}
 
-			$this->resultados = $this->prepararDadosRetorno();
+			if (!is_scalar($this->resultados) && $this->resultados->num_rows) {
+				$this->nroDeLinhas = $this->resultados->num_rows;
+				$this->resultados = $this->prepararDadosRetorno();
+			}
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
 			die();
