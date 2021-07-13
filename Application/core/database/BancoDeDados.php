@@ -60,6 +60,7 @@ class BancoDeDados {
 				$this->nroDeLinhas = $this->resultados->num_rows;
 				$this->resultados = $this->prepararDadosRetorno();
 			}
+			$this->resultados = $this->prepararDadosRetorno();
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
 			die();
@@ -74,6 +75,8 @@ class BancoDeDados {
 		while ($row = $obj->fetch_object()) {
 			$dados[] = $row;
 		}
+
+		$this->nroDeLinhas = count($dados);
 
 		return $dados;
 	}

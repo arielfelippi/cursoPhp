@@ -11,3 +11,5 @@
   //
   define("CREATE_TABLE", [""]);
   define("DROP_TABLE", [""]);
+  //
+  define("CONTROLLER_INICIAL", "TarefaController");

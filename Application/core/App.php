@@ -11,7 +11,7 @@ use Application\models;
 */
 class App {
 
-	protected $controller = 'TarefaController';
+	protected $controller = CONTROLLER_INICIAL;
 	protected $method = 'index';
 	protected $page404 = false;
 	protected $params = [];
