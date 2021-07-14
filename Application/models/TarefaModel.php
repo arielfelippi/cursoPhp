@@ -96,7 +96,19 @@ class TarefaModel implements IBaseModel {
 		return $this->executar($sql);
 	}
 
-	public function atualizar($dadosTarefa) {
+	public function atualizar($dados) {
+		$campos = implode(', ', array_keys($dados));
+		$valores = $this->implodeSanitize($dados);
+
+		$id = $dados["id"];
+
+		$updateFieldsValues = $this->prepareUpdate($campos, $valores);
+
+		$sql = (
+			"UPDATE {$this->tabela} SET {$updateFieldsValues}  WHERE id= '{$id}';"
+		);
+
+		return $this->executar($sql);
 	}
 
 	// Fim CRUD.
@@ -107,6 +119,18 @@ class TarefaModel implements IBaseModel {
 		};
 
 		$dadosTmp = implode(', ', array_map($add_quotes, $dados));
+
+		return $dadosTmp;
+	}
+
+	private function prepareUpdate($campos, $valores) {
+		$join_filedsValues = function ($str, $str2) {
+			$joined = (sprintf("'%s'", $str) . "=" . sprintf("'%s'", $str2));
+
+			return $joined;
+		};
+
+		$dadosTmp = array_map($join_filedsValues, $campos, $valores);
 
 		return $dadosTmp;
 	}

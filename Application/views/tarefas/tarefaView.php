@@ -1,7 +1,7 @@
 <br />
 <div class="container">
 
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="far fa-plus-square"></i> Criar
+	<button type="button" class="btn btn-primary btnCriarTarefa" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="far fa-plus-square"></i> Criar
 		tarefa</button>
 	<br />
 	<br />
@@ -86,7 +86,7 @@
 
 					<div class="modal-footer col-12">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-						<button type="submit" class="btn btn-primary btnInserir">Salvar</button>
+						<button type="button" class="btn btn-primary btnInserir">Salvar</button>
 					</div>
 				</form>
 				<!-- FIM DO FORM -->
