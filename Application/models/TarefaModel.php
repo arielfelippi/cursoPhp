@@ -81,8 +81,10 @@ class TarefaModel implements IBaseModel {
 	}
 
 	public function criar($dados) {
+		$valores = $this->sanitizeValuesArray($dados);
+
 		$campos = implode(', ', array_keys($dados));
-		$valores = $this->implodeSanitize($dados);
+		$valores = implode(', ', array_values($valores));
 
 		$data_criacao = date("Y-m-d H:i:s");
 
@@ -97,8 +99,8 @@ class TarefaModel implements IBaseModel {
 	}
 
 	public function atualizar($dados) {
-		$campos = implode(', ', array_keys($dados));
-		$valores = $this->implodeSanitize($dados);
+		$campos = array_keys($dados);
+		$valores = $this->sanitizeValuesArray($dados);
 
 		$id = $dados["id"];
 
@@ -108,29 +110,45 @@ class TarefaModel implements IBaseModel {
 			"UPDATE {$this->tabela} SET {$updateFieldsValues}  WHERE id= '{$id}';"
 		);
 
+		/*
+			"UPDATE tarefas SET
+				id='5', titulo='Teste da tarefa ASDF',
+				data_inicio='2021-07-13', data_fim='2021-07-19',
+				status='5', prioridade='3', usuario='ariel.felippi',
+				descricao='Teste Tarefa. FFFFFFFFFFFFFFFFFFFFF'
+			WHERE id= '5';"
+		*/
+
 		return $this->executar($sql);
 	}
 
 	// Fim CRUD.
 
-	private function implodeSanitize($dados) {
+	private function sanitizeValuesArray($dados) {
 		$add_quotes = function ($str) {
 			return sprintf("'%s'", $str);
 		};
 
-		$dadosTmp = implode(', ', array_map($add_quotes, $dados));
+		$dadosTmp = array_map($add_quotes, $dados);
 
 		return $dadosTmp;
 	}
 
 	private function prepareUpdate($campos, $valores) {
-		$join_filedsValues = function ($str, $str2) {
-			$joined = (sprintf("'%s'", $str) . "=" . sprintf("'%s'", $str2));
+		$join_filedsValues = function ($field, $value) {
+			$escaparHtml = ["descricao"];
+
+			if (in_array($field, $escaparHtml)) {
+				$value = htmlspecialchars($value, ENT_QUOTES);
+			}
+
+			$joined = ($field . "=" . $value);
 
 			return $joined;
 		};
 
 		$dadosTmp = array_map($join_filedsValues, $campos, $valores);
+		$dadosTmp = implode(', ', $dadosTmp);
 
 		return $dadosTmp;
 	}
