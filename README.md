@@ -1,5 +1,34 @@
 # cursoPhp 
 
+
+## Associar editores de texto ao Git
+
+```
+ git config --global core.editor "vim"
+```
+
+
+## Associar editores de texto ao Ubuntu
+
+```
+ sudo update-alternatives --config editor
+```
+
+Selecionar a opção (número) conforme desejado:
+
+```
+    There are 5 alternatives which provide `editor’.
+    Selection Alternative
+    ———————————————–
+    1 /usr/bin/vim
+    2 /bin/ed
+    *+ 3 /bin/nano
+    4 /usr/bin/vim.basic
+    5 /usr/bin/vim.tiny
+    Press enter to keep the default[*], or type selection number:
+```
+
+
 ## Instalar PHP7.4 
 
 ```PHP
