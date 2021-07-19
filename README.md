@@ -8,6 +8,13 @@
 ```
 
 
+## Mudar saida comandos Git
+
+```
+ git config --global core.pager cat
+```
+
+
 ## Associar editores de texto ao Ubuntu
 
 ```
